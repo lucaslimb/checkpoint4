@@ -3,7 +3,6 @@ package br.com.fiap.checkpoint2.controller;
 import br.com.fiap.checkpoint2.dto.paciente.PacienteRequestCreate;
 import br.com.fiap.checkpoint2.dto.paciente.PacienteRequestUpdate;
 import br.com.fiap.checkpoint2.dto.paciente.PacienteResponse;
-import br.com.fiap.checkpoint2.model.Paciente;
 import br.com.fiap.checkpoint2.service.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

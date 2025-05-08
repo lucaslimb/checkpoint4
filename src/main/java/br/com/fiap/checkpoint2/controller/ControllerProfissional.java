@@ -1,8 +1,5 @@
 package br.com.fiap.checkpoint2.controller;
 
-import br.com.fiap.checkpoint2.dto.paciente.PacienteRequestCreate;
-import br.com.fiap.checkpoint2.dto.paciente.PacienteRequestUpdate;
-import br.com.fiap.checkpoint2.dto.paciente.PacienteResponse;
 import br.com.fiap.checkpoint2.dto.profissional.ProfissionalRequestCreate;
 import br.com.fiap.checkpoint2.dto.profissional.ProfissionalRequestUpdate;
 import br.com.fiap.checkpoint2.dto.profissional.ProfissionalResponse;
