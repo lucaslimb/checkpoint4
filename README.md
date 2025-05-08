@@ -6,18 +6,20 @@ API com operações CRUD para controle de Pacientes, Profissionais e Consultas u
 ## 💻 Stack Utilizada
 
 - Java 17/18
-- Spring Boot 3.4.4
+- Spring Boot 3.4.5
 - Maven
 - Dependências:
     - Spring Web
     - Spring DevTools
     - SpringDoc OpenAPI
+    - MySQL Connector
+    - Spring Boot Data JPA
 
 ## 🔧 Instalação
 -  Clone o repositório:
 
 ```
-git clone https://github.com/lucaslimb/checkpoint1.git
+git clone https://github.com/lucaslimb/checkpoint2.git
 ```
 
 - Limpe e crie a pasta */target*
