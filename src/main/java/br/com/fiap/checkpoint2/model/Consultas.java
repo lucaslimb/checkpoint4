@@ -1,26 +1,32 @@
 package br.com.fiap.checkpoint2.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Cascade;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 
 @Entity
-public class Consulta {
-
+public class Consultas {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @ManyToOne
-    private Profissional profissional;
+    @Cascade(value = CascadeType.ALL)
+    @JoinColumn(name = "profissional_id")
+    private Profissionais profissional;
 
     @ManyToOne
-    private Paciente paciente;
+    @Cascade(value = CascadeType.ALL)
+    @JoinColumn(name ="paciente_id")
+    private Pacientes paciente;
 
     private LocalDateTime data_consulta;
-    private String status_consulta;
-    private Long quantidade_horas;
+    @Enumerated(EnumType.STRING)
+    private ConsultaStatus status;
+    private BigInteger quantidade_horas;
     private BigDecimal valor_consulta;
     private LocalDateTime created_at;
     private LocalDateTime updated_at;
@@ -33,19 +39,19 @@ public class Consulta {
         this.id = id;
     }
 
-    public Profissional getProfissional() {
+    public Profissionais getProfissional() {
         return profissional;
     }
 
-    public void setProfissional(Profissional profissional) {
+    public void setProfissional(Profissionais profissional) {
         this.profissional = profissional;
     }
 
-    public Paciente getPaciente() {
+    public Pacientes getPaciente() {
         return paciente;
     }
 
-    public void setPaciente(Paciente paciente) {
+    public void setPaciente(Pacientes paciente) {
         this.paciente = paciente;
     }
 
@@ -57,19 +63,19 @@ public class Consulta {
         this.data_consulta = data_consulta;
     }
 
-    public String getStatus_consulta() {
-        return status_consulta;
+    public ConsultaStatus getStatus() {
+        return status;
     }
 
-    public void setStatus_consulta(String status_consulta) {
-        this.status_consulta = status_consulta;
+    public void setStatus(ConsultaStatus status) {
+        this.status = status;
     }
 
-    public Long getQuantidade_horas() {
+    public BigInteger getQuantidade_horas() {
         return quantidade_horas;
     }
 
-    public void setQuantidade_horas(Long quantidade_horas) {
+    public void setQuantidade_horas(BigInteger quantidade_horas) {
         this.quantidade_horas = quantidade_horas;
     }
 

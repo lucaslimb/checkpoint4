@@ -1,34 +1,31 @@
 package br.com.fiap.checkpoint2.dto.paciente;
 
-import br.com.fiap.checkpoint2.model.Paciente;
-
+import br.com.fiap.checkpoint2.model.Pacientes;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class PacienteRequestCreate {
-
     private String nome;
     private String endereco;
     private String bairro;
     private String email;
     private String telefone_completo;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate data_nascimento;
-    private LocalDateTime created_at;
-    private LocalDateTime updated_at;
 
-    public Paciente toModel(){
-        Paciente paciente = new Paciente();
-        paciente.setNome(this.nome);
-        paciente.setEndereco(this.endereco);
-        paciente.setBairro(this.bairro);
-        paciente.setEmail(this.email);
-        paciente.setTelefone_completo(this.telefone_completo);
-        paciente.setData_nascimento(this.data_nascimento);
-        paciente.setCreated_at(this.created_at);
-        paciente.setUpdated_at(this.updated_at);
-        return paciente;
+    public Pacientes toModel(){
+        Pacientes pacientes = new Pacientes();
+        pacientes.setNome(this.getNome());
+        pacientes.setEndereco(this.getEndereco());
+        pacientes.setBairro(this.getBairro());
+        pacientes.setEmail(this.getBairro());
+        pacientes.setTelefone_completo(this.getTelefone_completo());
+        pacientes.setData_nascimento(this.getData_nascimento());
+        pacientes.setCreated_at(LocalDateTime.now());
+        pacientes.setUpdated_at(LocalDateTime.now());
+        return pacientes;
     }
-
     public String getNome() {
         return nome;
     }
@@ -76,21 +73,4 @@ public class PacienteRequestCreate {
     public void setData_nascimento(LocalDate data_nascimento) {
         this.data_nascimento = data_nascimento;
     }
-
-    public LocalDateTime getCreated_at() {
-        return created_at;
-    }
-
-    public void setCreated_at(LocalDateTime created_at) {
-        this.created_at = created_at;
-    }
-
-    public LocalDateTime getUpdated_at() {
-        return updated_at;
-    }
-
-    public void setUpdated_at(LocalDateTime updated_at) {
-        this.updated_at = updated_at;
-    }
-
 }

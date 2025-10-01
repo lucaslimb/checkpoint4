@@ -1,29 +1,24 @@
 package br.com.fiap.checkpoint2.dto.profissional;
 
-import br.com.fiap.checkpoint2.model.Paciente;
-import br.com.fiap.checkpoint2.model.Profissional;
-
+import br.com.fiap.checkpoint2.model.Profissionais;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class ProfissionalRequestCreate {
-
     private String nome;
     private String especialidade;
     private BigDecimal valor_hora;
-    private LocalDateTime created_at;
-    private LocalDateTime updated_at;
 
-    public Profissional toModel(){
-        Profissional profissional = new Profissional();
-        profissional.setNome(this.nome);
-        profissional.setEspecialidade(this.especialidade);
+    public Profissionais toModel(){
+        Profissionais profissional = new Profissionais();
+        profissional.setNome(this.getNome());
+        profissional.setEspecialidade(this.getEspecialidade());
         profissional.setValor_hora(this.valor_hora);
-        profissional.setCreated_at(this.created_at);
-        profissional.setUpdated_at(this.updated_at);
+        profissional.setCreated_at(LocalDateTime.now());
+        profissional.setUpdated_at(LocalDateTime.now());
+
         return profissional;
     }
-
     public String getNome() {
         return nome;
     }
@@ -46,22 +41,6 @@ public class ProfissionalRequestCreate {
 
     public void setValor_hora(BigDecimal valor_hora) {
         this.valor_hora = valor_hora;
-    }
-
-    public LocalDateTime getCreated_at() {
-        return created_at;
-    }
-
-    public void setCreated_at(LocalDateTime created_at) {
-        this.created_at = created_at;
-    }
-
-    public LocalDateTime getUpdated_at() {
-        return updated_at;
-    }
-
-    public void setUpdated_at(LocalDateTime updated_at) {
-        this.updated_at = updated_at;
     }
 
 }

@@ -1,27 +1,23 @@
 package br.com.fiap.checkpoint2.dto.paciente;
 
-import br.com.fiap.checkpoint2.model.Paciente;
-
-import java.time.LocalDate;
+import br.com.fiap.checkpoint2.model.Pacientes;
 import java.time.LocalDateTime;
 
 public class PacienteRequestUpdate {
-
     private String nome;
     private String endereco;
     private String bairro;
     private String email;
     private String telefone_completo;
-    private LocalDateTime updated_at;
 
-    public Paciente toModel(Paciente paciente){
-        paciente.setNome(this.nome);
-        paciente.setEndereco(this.endereco);
-        paciente.setBairro(this.bairro);
-        paciente.setEmail(this.email);
-        paciente.setTelefone_completo(this.telefone_completo);
-        paciente.setUpdated_at(this.updated_at);
-        return paciente;
+    public Pacientes toModel(Pacientes pacientes){
+        pacientes.setNome(this.getNome());
+        pacientes.setEndereco(this.getEndereco());
+        pacientes.setBairro(this.getBairro());
+        pacientes.setEmail(this.getEmail());
+        pacientes.setTelefone_completo(this.getTelefone_completo());
+        pacientes.setUpdated_at(LocalDateTime.now());
+        return pacientes;
     }
 
     public String getNome() {
@@ -63,13 +59,4 @@ public class PacienteRequestUpdate {
     public void setTelefone_completo(String telefone_completo) {
         this.telefone_completo = telefone_completo;
     }
-
-    public LocalDateTime getUpdated_at() {
-        return updated_at;
-    }
-
-    public void setUpdated_at(LocalDateTime updated_at) {
-        this.updated_at = updated_at;
-    }
-
 }

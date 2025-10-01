@@ -1,36 +1,32 @@
-package br.com.fiap.checkpoint2.dto.profissional;
+package br.com.fiap.checkpoint2.model;
 
-import br.com.fiap.checkpoint2.model.Profissionais;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
-public class ProfissionalResponse {
+@Entity
+public class Profissionais {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String nome;
     private String especialidade;
     private BigDecimal valor_hora;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern =  "dd-MM-yyyy HH:mm")
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime created_at;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern =  "dd-MM-yyyy HH:mm")
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime updated_at;
-    private List<ConsultasResponse> consultas;
 
+    @OneToMany(mappedBy = "profissional",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private List<Consultas> consultas; //modificar os services, controlers e dtos adicionando a lista
 
-    public ProfissionalResponse toDto(Profissionais profissionais){
-        this.setId(profissionais.getId());
-        this.setNome(profissionais.getNome());
-        this.setEspecialidade(profissionais.getEspecialidade());
-        this.setValor_hora(profissionais.getValor_hora());
-        this.setCreated_at(profissionais.getCreated_at());
-        this.setUpdated_at(profissionais.getUpdated_at());
-        List<ConsultasResponse> consultasResponses = profissionais.getConsultas()
-                .stream().map(consulta -> new ConsultasResponse().toDto(consulta)).
-                collect(Collectors.toList());
-        this.setConsultas(consultasResponses);
-        return this;
-    }
     public Long getId() {
         return id;
     }
@@ -79,11 +75,11 @@ public class ProfissionalResponse {
         this.updated_at = updated_at;
     }
 
-    public List<ConsultasResponse> getConsultas() {
+    public List<Consultas> getConsultas() {
         return consultas;
     }
 
-    public void setConsultas(List<ConsultasResponse> consultasResponses) {
-        this.consultas = consultasResponses;
+    public void setConsultas(List<Consultas> consultas) {
+        this.consultas = consultas;
     }
 }

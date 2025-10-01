@@ -1,28 +1,38 @@
-package br.com.fiap.checkpoint2.model;
+package br.com.fiap.checkpoint2.dto.paciente;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import br.com.fiap.checkpoint2.model.Pacientes;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Entity
-public class Paciente {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class PacienteResponseCreate {
     private Long id;
     private String nome;
     private String endereco;
     private String bairro;
     private String email;
     private String telefone_completo;
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate data_nascimento;
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime created_at;
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime updated_at;
 
+    public PacienteResponseCreate toDto(Pacientes pacientes){
+        this.setId(pacientes.getId());
+        this.setNome(pacientes.getNome());
+        this.setEndereco(pacientes.getEndereco());
+        this.setBairro(pacientes.getBairro());
+        this.setEmail(pacientes.getEmail());
+        this.setTelefone_completo(pacientes.getTelefone_completo());
+        this.setData_nascimento(pacientes.getData_nascimento());
+        this.setCreated_at(pacientes.getCreated_at());
+        this.setUpdated_at(pacientes.getUpdated_at());
+        return this;
+    }
 
     public Long getId() {
         return id;
@@ -96,4 +106,3 @@ public class Paciente {
         this.updated_at = updated_at;
     }
 }
-

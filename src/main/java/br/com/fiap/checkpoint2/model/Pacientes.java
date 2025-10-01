@@ -1,46 +1,33 @@
-package br.com.fiap.checkpoint2.dto.paciente;
+package br.com.fiap.checkpoint2.model;
 
-import br.com.fiap.checkpoint2.dto.consulta.ConsultaResponse;
-import br.com.fiap.checkpoint2.model.Pacientes;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class PacienteResponse {
+@Entity
+public class Pacientes {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String nome;
     private String endereco;
     private String bairro;
     private String email;
     private String telefone_completo;
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate data_nascimento;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern =  "dd-MM-yyyy HH:mm")
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime created_at;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern =  "dd-MM-yyyy HH:mm")
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime updated_at;
-    private List<ConsultaResponse> consultas;
 
-    public PacienteResponse toDto(Pacientes pacientes){
-        this.setId(pacientes.getId());
-        this.setNome(pacientes.getNome());
-        this.setEndereco(pacientes.getEndereco());
-        this.setBairro(pacientes.getBairro());
-        this.setEmail(pacientes.getEmail());
-        this.setTelefone_completo(pacientes.getTelefone_completo());
-        this.setData_nascimento(pacientes.getData_nascimento());
-        this.setCreated_at(pacientes.getCreated_at());
-        this.setUpdated_at(pacientes.getUpdated_at());
-        List<ConsultaResponse> consultasResponses = pacientes.getConsultas()
-                .stream().map(consulta -> new ConsultaResponse().toDto(consulta)).
-                collect(Collectors.toList());
-        this.setConsultas(consultasResponses);
-        return this;
-    }
+    @OneToMany(mappedBy = "paciente",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private List<Consultas> consultas;
     public Long getId() {
         return id;
     }
@@ -113,11 +100,11 @@ public class PacienteResponse {
         this.updated_at = updated_at;
     }
 
-    public List<ConsultaResponse> getConsultas() {
+    public List<Consultas> getConsultas() {
         return consultas;
     }
 
-    public void setConsultas(List<ConsultaResponse> consultas) {
+    public void setConsultas(List<Consultas> consultas) {
         this.consultas = consultas;
     }
 }
