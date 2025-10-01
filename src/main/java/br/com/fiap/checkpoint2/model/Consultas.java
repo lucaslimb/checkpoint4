@@ -1,7 +1,6 @@
 package br.com.fiap.checkpoint2.model;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.Cascade;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -13,13 +12,11 @@ public class Consultas {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne
-    @Cascade(value = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "profissional_id")
     private Profissionais profissional;
 
-    @ManyToOne
-    @Cascade(value = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name ="paciente_id")
     private Pacientes paciente;
 
