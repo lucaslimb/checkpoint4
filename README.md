@@ -1,13 +1,14 @@
-# ☕︎ Checkpoint 2 - Microservice and Web Engineering
+# ☕︎ Checkpoint 4 - Microservice and Web Engineering
 *Lucas de Lima - RM98632*
 
-API com operações CRUD para controle de Pacientes, Profissionais e Consultas utilizando Java Spring Boot
+API com operações CRUD para controle de Pacientes, Profissionais e Consultas utilizando Java Spring Boot disponível através de imagem no Dokcer Hub
 
 ## 💻 Stack Utilizada
 
 - Java 17/18
 - Spring Boot 3.4.5
 - Maven
+- Docker
 - Dependências:
     - Spring Web
     - Spring DevTools
@@ -15,41 +16,42 @@ API com operações CRUD para controle de Pacientes, Profissionais e Consultas u
     - MySQL Connector
     - Spring Boot Data JPA
 
-## 🔧 Instalação
--  Clone o repositório:
+## Execução a partir da imagem no Docker Hub
 
-```
-git clone https://github.com/lucaslimb/checkpoint2.git
-```
+1.  **Crie a rede Docker:**
+    ```bash
+    docker network create app-networks
+    ```
 
-- Limpe e crie a pasta */target*
+2.  **Inicie o contêiner do banco de dados:**
+    ```bash
+    docker run -d --name mysql-db --network app-networks -e MYSQL_ROOT_PASSWORD=root_pwd -e MYSQL_DATABASE=api -p 3306:3306 mysql:8.0
+    ```
 
-```
-mvn clean package
-```
+3.  **Inicie o contêiner da API:**
+    ```bash
+    docker run -d --name checkpoint4-api --network app-networks -p 8080:8080 -e DB_SERVER=mysql-db -e DB_DATABASE=api -e DB_USER=root -e DB_PASSWORD=root_pwd lucaslimb/checkpoint4:latest
+    ```
 
-- Inicie o banco de dados
-```
-docker run -d \
-    --name mysql \
-    --rm \
-    -e MYSQL_ROOT_PASSWORD=root_pwd \
-    -e MYSQL_USER=new_user \
-    -e MYSQL_PASSWORD=my_pwd \
-    -p 3306:3306 \
-    mysql
-```
+---
 
-## 🌐 Navegação
--  Execute com **Maven**:
+### Execução a partir do docker-compose
 
-```
-mvn spring-boot:run
-```
+1.  **Para subir os serviços:**
+    ```bash
+    docker-compose up -d
+    ```
 
-## 📖 Documentação
--  **Swagger**, disponível em:
-    - http://localhost:8080/
+2.  **Para derrubar os serviços:**
+    ```bash
+    docker-compose down
+    ```
+
+---
+
+## 🌐 Acesso ao Swagger
+
+[http://localhost:8080/](http://localhost:8080/)
 
 ## 📓 Referências
 - https://springdoc.org/
