@@ -1,6 +1,10 @@
 # ☕︎ Checkpoint 5 - Microservice and Web Engineering
 *Lucas de Lima - RM98632*
 
+*Isabella Gomes Menezes - RM552327*
+
+*Martin Hilst - RM99451*
+
 API com operações CRUD para controle de Pacientes, Profissionais e Consultas utilizando Java Spring Boot disponível através de imagem no Dokcer Hub e GitHub Actions para CI/CD
 
 ## 💻 Stack Utilizada
