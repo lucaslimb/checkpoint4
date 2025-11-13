@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>br.com.fiap</groupId>
 	<artifactId>checkpoint2</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<name>checkpoint2</name>
 	<description>Checkpoint 2</description>
 	<url/>
